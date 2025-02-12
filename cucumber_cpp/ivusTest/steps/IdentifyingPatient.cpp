@@ -1,9 +1,8 @@
+#include "IdentifyingPatient.h"
 #include "cucumber_cpp/library/Context.hpp"
 #include "cucumber_cpp/library/Steps.hpp"
-
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-
 #include <cstdint>
 
 namespace
@@ -13,6 +12,14 @@ namespace
         return std::cout << std::endl;
     }
 }
+
+namespace Philips::IGT::IVUSCV::Test::IdentifyingPatient
+{
+    void sharedStep(int withArgs)
+    {
+        log() << withArgs;
+    }
+} // namespace Philips::IGT::IVUSCV::Test::IdentifyingPatient
 
 GIVEN(R"(the following studies)")
 {

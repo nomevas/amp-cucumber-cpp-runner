@@ -9,3 +9,5 @@
 - [x] Ctest filters
 * `ctest -R "scenario.*.en_EN" -C Debug` to run just english tests
 - [ ] Hooks
+- [x] Shared steps
+* add header file next to cpp file
