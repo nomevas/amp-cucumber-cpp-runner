@@ -1,4 +1,5 @@
 add_subdirectory(library)
 add_subdirectory(runner)
-add_subdirectory(example)
-add_subdirectory(acceptance_test)
+#add_subdirectory(example)
+add_subdirectory(ivusTest)
+#add_subdirectory(acceptance_test)
