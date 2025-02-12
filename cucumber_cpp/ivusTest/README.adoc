@@ -1,0 +1,11 @@
+# ToDO
+
+- [ ] Integrate with the IVUS system. Conan package is missing, we should create one.
+- [x] Integrate with CTest.
+* `ctest -R "scenario.*" -C Debug` runs just the scenario tests. Labeling is also an option
+- [x] Check multiple variations of step definition, there were comments that matchers doesn't work well.
+- [x] Typed tests alternative
+* command line options will be used to setup env and to create config objects
+- [x] Ctest filters
+* `ctest -R "scenario.*.en_EN" -C Debug` to run just english tests
+- [ ] Hooks

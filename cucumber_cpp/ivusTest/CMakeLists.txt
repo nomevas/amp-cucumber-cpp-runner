@@ -12,23 +12,26 @@ target_link_libraries(scenario.test.runner PUBLIC
         cucumber_cpp.runner
 )
 
+set(SUPPORTED_SCREENS Boom16x9 Boom5x4 Tsm)
+set(SUPPORTED_LANGUAGES en_EN de_DE fr_FR)
+
+macro(add_scenario_test TARGET_NAME)
+    set(TEST_RUNNER scenario.${TARGET_NAME})
+    add_executable(${TEST_RUNNER} steps/${TARGET_NAME}.cpp)
+    target_link_libraries(${TEST_RUNNER} PRIVATE
+            scenario.test.runner
+    )
+    foreach(SCREEN IN LISTS SUPPORTED_SCREENS)
+        foreach(LANGUAGE IN LISTS SUPPORTED_LANGUAGES)
+            set(TEST_NAME scenario.${TARGET_NAME}.${SCREEN}.${LANGUAGE})
+            add_test(NAME ${TEST_NAME} COMMAND ${TEST_RUNNER} run --feature
+                    ${CMAKE_CURRENT_SOURCE_DIR}/features/${TARGET_NAME}.feature --report console --screen ${SCREEN} --language ${LANGUAGE})
+        endforeach()
+    endforeach()
+endmacro()
+
 enable_testing()
-
-# foreach feature file in fixtures
-add_executable(scenario.IdentifyPatient steps/IdentifyingPatient.cpp)
-target_link_libraries(scenario.IdentifyPatient PRIVATE
-        scenario.test.runner
-)
-add_test(NAME scenario.IdentifyPatient COMMAND scenario.IdentifyPatient run --feature
-        ${CMAKE_CURRENT_SOURCE_DIR}/features/IdentifyingPatient.feature --report console)
-
-add_executable(scenario.InspectionOfTomographicImages steps/InspectionOfTomographicImages.cpp)
-target_link_libraries(scenario.InspectionOfTomographicImages PRIVATE
-        scenario.test.runner
-)
-add_test(NAME scenario.InspectionOfTomographicImages COMMAND scenario.InspectionOfTomographicImages run --feature
-        ${CMAKE_CURRENT_SOURCE_DIR}/features/InspectionOfTomographicImages.feature --report console)
-
-
+add_scenario_test(IdentifyingPatient)
+add_scenario_test(InspectionOfTomographicImages)
 
 
