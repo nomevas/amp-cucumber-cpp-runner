@@ -26,6 +26,7 @@ macro(add_scenario_test TARGET_NAME)
             set(TEST_NAME scenario.${TARGET_NAME}.${SCREEN}.${LANGUAGE})
             add_test(NAME ${TEST_NAME} COMMAND ${TEST_RUNNER} run --feature
                     ${CMAKE_CURRENT_SOURCE_DIR}/features/${TARGET_NAME}.feature --report console --screen ${SCREEN} --language ${LANGUAGE})
+            set_tests_properties(${TEST_NAME} PROPERTIES DEPENDS ${TEST_RUNNER})
         endforeach()
     endforeach()
 endmacro()
